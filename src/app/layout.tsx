@@ -20,8 +20,8 @@ import { GeistSans } from "geist/font/sans";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Max Wiseman",
-  description: "Student, Developer, and Designer",
+  title: "Office Quotes",
+  description: "Every episode. Every quote.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
