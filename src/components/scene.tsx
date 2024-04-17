@@ -46,23 +46,25 @@ export function Scene({
         {...props}
       >
         {children}
-        <div className="absolute left-0 top-1/2 -translate-x-3/4 -translate-y-1/2">
-          <AnimatePresence>
-            {hover && (
-              <motion.div
-                layout
-                layoutId="scene-link"
-                initial={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
-                <ClipboardButton
-                  text={`${pathname}?q=${encodeURIComponent(textSha.match(/.{4}$/)?.[0] ?? "")}`}
-                  icon={<IconLink />}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
+        <div className="absolute bottom-0 left-0 top-0">
+          <div className="sticky top-4 my-3 -translate-x-3/4">
+            <AnimatePresence>
+              {hover && (
+                <motion.div
+                  layout
+                  layoutId="scene-link"
+                  initial={{ opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <ClipboardButton
+                    text={`${pathname}?q=${encodeURIComponent(textSha.match(/.{4}$/)?.[0] ?? "")}`}
+                    icon={<IconLink />}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </Card>
     </div>
