@@ -20,6 +20,10 @@ const fuse = new Fuse(
 export async function GET(request: Request): Promise<Response> {
   const { searchParams } = new URL(request.url);
 
+  if (searchParams.get("q") === "" || searchParams.has("q") !== true) {
+    return Response.json([]);
+  }
+
   return Response.json(
     fuse.search(searchParams.get("q") ?? "").map((result) => ({
       ...result,

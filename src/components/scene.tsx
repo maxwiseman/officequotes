@@ -10,6 +10,7 @@ import { ClipboardButton } from "./clipboard-button";
 import { usePathname, useSearchParams } from "next/navigation";
 import { onlyText } from "react-children-utilities";
 import { createHash } from "crypto";
+import { env } from "@/env";
 
 export function Scene({
   className,
@@ -27,12 +28,12 @@ export function Scene({
     if (
       params.get("q") === encodeURIComponent(textSha.match(/.{4}$/)?.[0] ?? "")
     ) {
-      cardRef.current?.scrollIntoView();
+      cardRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [params, textSha]);
 
   return (
-    <div className="pb-4" ref={cardRef}>
+    <div className="scroll-m-10 pb-4" ref={cardRef}>
       <Card
         className={cn(
           "relative p-4",
@@ -58,7 +59,7 @@ export function Scene({
                   animate={{ opacity: 1 }}
                 >
                   <ClipboardButton
-                    text={`${pathname}?q=${encodeURIComponent(textSha.match(/.{4}$/)?.[0] ?? "")}`}
+                    text={`${env.NEXT_PUBLIC_SITE_URL}${pathname}?q=${encodeURIComponent(textSha.match(/.{4}$/)?.[0] ?? "")}`}
                     icon={<IconLink />}
                   />
                 </motion.div>

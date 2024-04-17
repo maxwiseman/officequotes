@@ -1,5 +1,6 @@
 import { EpisodeList } from "@/components/episode-list";
 import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
+import { allEpisodes } from "contentlayer/generated";
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,7 +26,12 @@ export default function PostsPage() {
       <h1 className="mt-4 scroll-m-20 text-4xl font-bold tracking-tight">
         Episodes
       </h1>
-      <EpisodeList />
+      <EpisodeList
+        episodes={allEpisodes.map((episode) => ({
+          ...episode,
+          body: undefined,
+        }))}
+      />
     </>
   );
 }

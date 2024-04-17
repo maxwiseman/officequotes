@@ -1,6 +1,6 @@
 "use client";
 
-import { type Episode, allEpisodes } from "contentlayer/generated";
+import { type Episode } from "contentlayer/generated";
 import Link from "next/link";
 import { Card } from "./ui/card";
 import { Input } from "./ui/input";
@@ -10,7 +10,11 @@ import { Spinner } from "./ui/spinner";
 import { useQuery } from "@tanstack/react-query";
 import { type FuseResult } from "fuse.js";
 
-export function EpisodeList() {
+export function EpisodeList({
+  episodes,
+}: {
+  episodes: Omit<Episode, "body">[];
+}) {
   const [searchValue, setSearchValue] = useState("");
   const [searchQuery, setSearchQuery] = useDebounceValue("", 1000);
   const { data, isLoading } = useQuery({
@@ -50,7 +54,7 @@ export function EpisodeList() {
             </Link>
           ))
         ) : (
-          allEpisodes.map((episode) => (
+          episodes.map((episode) => (
             <Link key={episode._id} href={episode.url ?? ""}>
               <Card className="p-4">
                 <h6 className="line-clamp-1 font-bold">{episode.title}</h6>
