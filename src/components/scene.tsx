@@ -28,7 +28,7 @@ export function Scene({
     if (
       params.get("q") === encodeURIComponent(textSha.match(/.{4}$/)?.[0] ?? "")
     ) {
-      cardRef.current?.scrollIntoView({ behavior: "smooth" });
+      cardRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [params, textSha]);
 
@@ -47,7 +47,7 @@ export function Scene({
         {...props}
       >
         {children}
-        <div className="absolute bottom-0 left-0 top-0">
+        <div className="pointer-events-none absolute bottom-0 left-0 top-0">
           <div className="sticky top-4 my-3 -translate-x-3/4">
             <AnimatePresence>
               {hover && (
@@ -59,6 +59,7 @@ export function Scene({
                   animate={{ opacity: 1 }}
                 >
                   <ClipboardButton
+                    className="pointer-events-auto"
                     text={`${env.NEXT_PUBLIC_SITE_URL}${pathname}?q=${encodeURIComponent(textSha.match(/.{4}$/)?.[0] ?? "")}`}
                     icon={<IconLink />}
                   />
