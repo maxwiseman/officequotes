@@ -4,7 +4,6 @@ import { allEpisodes } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { BreadcrumbGroup } from "@/components/ui/breadcrumb";
-import { MotionLayoutGroup } from "@/components/motion-layout-group";
 import { Suspense } from "react";
 
 export async function generateStaticParams() {
@@ -94,11 +93,9 @@ export default async function Page({
           </h3>
         )}
       </div>
-      <MotionLayoutGroup>
-        <Suspense>
-          <Mdx code={episode.body.code} />
-        </Suspense>
-      </MotionLayoutGroup>
+      <Suspense>
+        <Mdx code={episode.body.code} />
+      </Suspense>
     </div>
   );
 }
